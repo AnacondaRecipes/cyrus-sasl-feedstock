@@ -27,7 +27,7 @@ build:
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('c') }}
     - krb5 1.14.*
     - openssl 1.0.*
     - libntlm
