@@ -28,3 +28,8 @@ make install
 
 # awful--
 rm -f ${PREFIX}/include/des.h
+
+# ++awful
+if [[ ${HOST} =~ .*darwin.* ]]; then
+  ${INSTALL_NAME_TOOL:-install_name_tool} -id @rpath/libsasl2.dylib ${PREFIX}/lib/libsasl2.dylib
+fi
