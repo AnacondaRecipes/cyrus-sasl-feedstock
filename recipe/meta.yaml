@@ -12,18 +12,13 @@ source:
   url: ftp://ftp.cyrusimap.org/cyrus-sasl/{{ name }}-{{ version }}.tar.gz
   {{ hashtype }}: {{ hash }}
   patches:
+    - 0001-Include-stddef-in-sasl-h-for-size_t.patch
     - makefile.patch  # [osx]
     - include_makefile.patch  # [osx]
     - lib_makefile.patch  # [osx]
 
 build:
-  number: 0
-  script:
-    - ./configure --prefix=$PREFIX  # [linux]
-    - ./configure --prefix=$PREFIX --disable-macos-framework  # [osx]
-    - make
-    - make install
-  skip: True  # [win]
+  number: 1
 
 requirements:
   build:
@@ -62,5 +57,6 @@ about:
 extra:
   recipe-maintainers:
     - mariusvniekerk
-    - wesm
     - martindurant
+    - mingwandroid
+    - wesm
