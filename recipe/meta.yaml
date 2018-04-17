@@ -18,19 +18,18 @@ source:
     - lib_makefile.patch  # [osx]
 
 build:
-  number: 1
+  number: 2
   skip: True  # [win]
+  run_exports:
+    # gud: https://abi-laboratory.pro/tracker/timeline/cyrus-sasl/
+    - {{ pin_subpackage('cyrus-sasl') }}
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - krb5 1.14.*
-    - openssl 1.0.*
-    - libntlm
-
-  run:
-    - krb5 1.14.*
-    - openssl 1.0.*
+  host:
+    - krb5
+    - openssl
     - libntlm
 
 test:
