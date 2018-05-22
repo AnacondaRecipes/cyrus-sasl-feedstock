@@ -3,10 +3,7 @@
 # ++awful .. broken configure script here, it does not look in include/openssl
 cp -f ${PREFIX}/include/openssl/des.h ${PREFIX}/include
 
-export CPPFLAGS="${CPPFLAGS} -I${PREFIX}/include"
-export LDFLAGS="${LDFLAGS} -L${PREFIX}/lib"
-
-if [[ ${HOST} =~ .*darwin.* ]]; then
+if [[ ${target_platform} == osx-64 ]]; then
   DISABLE_MACOS_FRAMEWORK=--disable-macos-framework
 fi
 
@@ -30,6 +27,9 @@ make install
 rm -f ${PREFIX}/include/des.h
 
 # ++awful
-if [[ ${HOST} =~ .*darwin.* ]]; then
+if [[ ${target_platform} == osx-64 ]]; then
   ${INSTALL_NAME_TOOL:-install_name_tool} -id @rpath/libsasl2.dylib ${PREFIX}/lib/libsasl2.dylib
+  ${INSTALL_NAME_TOOL:-install_name_tool} -change /libsasl2.dylib @rpath/libsasl2.dylib ${PREFIX}/sbin/pluginviewer
+  ${INSTALL_NAME_TOOL:-install_name_tool} -change /libsasl2.dylib ${PREFIX}/lib/libsasl2.dylib ${PREFIX}/sbin/saslpasswd2
+  ${INSTALL_NAME_TOOL:-install_name_tool} -change /libsasl2.dylib ${PREFIX}/lib/libsasl2.dylib ${PREFIX}/sbin/sasldblistusers2
 fi

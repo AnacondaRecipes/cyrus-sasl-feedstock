@@ -23,6 +23,7 @@ build:
   skip: True  # [win]
   missing_dso_whitelist:          # [osx]
     - /usr/lib/libresolv.9.dylib  # [osx]
+    - /usr/lib/libpam.2.dylib     # [osx]
 
 requirements:
   build:
