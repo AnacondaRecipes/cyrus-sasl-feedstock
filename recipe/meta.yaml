@@ -21,6 +21,8 @@ source:
 build:
   number: 2
   skip: True  # [win]
+  missing_dso_whitelist:          # [osx]
+    - /usr/lib/libresolv.9.dylib  # [osx]
 
 requirements:
   build:
