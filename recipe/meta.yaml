@@ -19,11 +19,13 @@ source:
     - CVE-2013-4122-dedad73e5e7a75d01a5f3d5a6702ab8ccd2ff40d.patch
 
 build:
-  number: 2
+  number: 3
   skip: True  # [win]
   missing_dso_whitelist:          # [osx]
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libpam.2.dylib     # [osx]
+  run_exports:
+    - {{ pin_subpackage('cyrus-sasl') }}
 
 requirements:
   build:
