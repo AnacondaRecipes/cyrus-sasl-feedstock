@@ -25,6 +25,9 @@ build:
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libpam.2.dylib     # [osx]
   run_exports:
+    # https://abi-laboratory.pro/tracker/timeline/cyrus-sasl/
+    # SONAME was changed once in a patch release but it was 6 years ago so
+    # giving them the benefit of the doubt that it was a one-off mistake.
     - {{ pin_subpackage('cyrus-sasl') }}
 
 requirements:
