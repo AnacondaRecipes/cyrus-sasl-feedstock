@@ -48,6 +48,9 @@ rm -f ${PREFIX}/include/des.h
 
 # ++awful
 if [[ ${target_platform} == osx-64 ]]; then
+  mv ${PREFIX}/sbin/${HOST}-pluginviewer ${PREFIX}/sbin/pluginviewer
+  mv ${PREFIX}/sbin/${HOST}-saslpasswd2 ${PREFIX}/sbin/saslpasswd2
+  mv ${PREFIX}/sbin/${HOST}-sasldblistusers2 ${PREFIX}/sbin/sasldblistusers2
   ${INSTALL_NAME_TOOL:-install_name_tool} -id @rpath/libsasl2.dylib ${PREFIX}/lib/libsasl2.dylib
   ${INSTALL_NAME_TOOL:-install_name_tool} -change /libsasl2.dylib @rpath/libsasl2.dylib ${PREFIX}/sbin/pluginviewer
   ${INSTALL_NAME_TOOL:-install_name_tool} -change /libsasl2.dylib ${PREFIX}/lib/libsasl2.dylib ${PREFIX}/sbin/saslpasswd2
