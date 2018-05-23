@@ -8,15 +8,22 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.tar.gz
-  url: ftp://ftp.cyrusimap.org/cyrus-sasl/{{ name }}-{{ version }}.tar.gz
-  {{ hashtype }}: {{ hash }}
-  patches:
-    - 0001-Include-stddef-in-sasl-h-for-size_t.patch
-    - makefile.patch  # [osx]
-    - include_makefile.patch  # [osx]
-    - lib_makefile.patch  # [osx]
-    - CVE-2013-4122-dedad73e5e7a75d01a5f3d5a6702ab8ccd2ff40d.patch
+  - url: ftp://ftp.cyrusimap.org/cyrus-sasl/{{ name }}-{{ version }}.tar.gz
+    {{ hashtype }}: {{ hash }}
+    patches:
+      - 0001-Include-stddef-in-sasl-h-for-size_t.patch
+      - makefile.patch  # [osx]
+      - include_makefile.patch  # [osx]
+      - lib_makefile.patch  # [osx]
+      - CVE-2013-4122-dedad73e5e7a75d01a5f3d5a6702ab8ccd2ff40d.patch
+  #    - 1cbb299fd90097c10a4608119f3fb567d757e8be.patch
+  # - url: https://github.com/cyrusimap/cyrus-sasl/raw/master/autogen.sh
+  #   fn: cyrus-sasl-autogen.sh
+  #   sha256: 59b2d067f956a2613bf6348fb3bfeb7f4197c53427fda3ac2774a143f9373eca
+  # - url: http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD
+  #   fn: config.guess
+  # - url: http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=HEAD
+  #   fn: config.sub
 
 build:
   number: 3
@@ -33,6 +40,10 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    # - libtool
+    # - pkg-config
+    # - automake
+    # - autoconf
     - make
   host:
     - krb5

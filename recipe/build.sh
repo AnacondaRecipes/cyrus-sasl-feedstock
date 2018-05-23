@@ -10,6 +10,19 @@ fi
 if [[ ${target_platform} =~ .*ppc.* ]]; then
   # We should probably run autoreconf here instead, but I am tired of this software.
   BUILD="--build=${HOST}"
+  GSSAPI="--disable-gssapi"
+  if [[ 0 == 1 ]]; then
+    echo libtoolize
+    libtoolize
+    echo aclocal -I cmulocal -I config
+    aclocal -I cmulocal -I config
+    echo autoheader
+    autoheader
+    echo autoconf
+    autoconf
+    echo automake --add-missing --include-deps
+    automake --add-missing --include-deps
+  fi
 fi
 
 # --disable-dependency-tracking works around:
@@ -17,6 +30,7 @@ fi
 ./configure --prefix=${PREFIX}                    \
             --host=${HOST}                        \
             ${BUILD}                              \
+            ${GSSAPI}                             \
             --enable-digest                       \
             --with-des=${PREFIX}                  \
             --with-plugindir=${PREFIX}/lib/sasl2  \
