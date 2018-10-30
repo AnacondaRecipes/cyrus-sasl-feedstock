@@ -11,13 +11,11 @@ source:
   - url: ftp://ftp.cyrusimap.org/cyrus-sasl/{{ name }}-{{ version }}.tar.gz
     {{ hashtype }}: {{ hash }}
     patches:
-      - 0001-Include-stddef-in-sasl-h-for-size_t.patch
-      - makefile.patch  # [osx]
-      - include_makefile.patch  # [osx]
-      - lib_makefile.patch  # [osx]
-      - CVE-2013-4122-dedad73e5e7a75d01a5f3d5a6702ab8ccd2ff40d.patch
-      - 0001-win-fixes.patch
-  #    - 1cbb299fd90097c10a4608119f3fb567d757e8be.patch
+      - 0001-Include-stddef-in-sasl.h-for-size_t.patch
+      - 0002-adjust-Makefile.am-files-for-osx.patch  # [osx]
+      - 0003-fix-CVE-2013-4122.patch
+      - 0004-windows-fixes.patch
+      - 0005-openssl-1.1.1-support.patch
   # - url: https://github.com/cyrusimap/cyrus-sasl/raw/master/autogen.sh
   #   fn: cyrus-sasl-autogen.sh
   #   sha256: 59b2d067f956a2613bf6348fb3bfeb7f4197c53427fda3ac2774a143f9373eca
@@ -27,7 +25,7 @@ source:
   #   fn: config.sub
 
 build:
-  number: 3
+  number: 4
   missing_dso_whitelist:          # [osx]
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libpam.2.dylib     # [osx]
