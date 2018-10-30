@@ -1,7 +1,7 @@
 From 49b4778c9e472f5ca53b9089f4b7bb03ccc63cb1 Mon Sep 17 00:00:00 2001
 From: Jonathan Helmus <jjhelmus@gmail.com>
 Date: Tue, 30 Oct 2018 10:22:04 -0500
-Subject: [PATCH 1/5] Include stddef in sasl.h for size_t
+Subject: [PATCH 1/6] Include stddef in sasl.h for size_t
 
 ---
  include/sasl.h | 2 ++

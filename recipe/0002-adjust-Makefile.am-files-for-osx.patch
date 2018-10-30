@@ -1,7 +1,7 @@
 From f008c76d0ee59dcebd16986436ca32377b273a03 Mon Sep 17 00:00:00 2001
 From: Jonathan Helmus <jjhelmus@gmail.com>
 Date: Tue, 30 Oct 2018 10:24:54 -0500
-Subject: [PATCH 2/5] adjust Makefile.am files for osx
+Subject: [PATCH 2/6] adjust Makefile.am files for osx
 
 ---
  Makefile.am         | 15 +--------------

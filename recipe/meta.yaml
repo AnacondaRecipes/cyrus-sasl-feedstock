@@ -16,6 +16,7 @@ source:
       - 0003-fix-CVE-2013-4122.patch
       - 0004-windows-fixes.patch
       - 0005-openssl-1.1.1-support.patch
+      - 0006-openssl-1.1.1-support-on-windows.patch
   # - url: https://github.com/cyrusimap/cyrus-sasl/raw/master/autogen.sh
   #   fn: cyrus-sasl-autogen.sh
   #   sha256: 59b2d067f956a2613bf6348fb3bfeb7f4197c53427fda3ac2774a143f9373eca

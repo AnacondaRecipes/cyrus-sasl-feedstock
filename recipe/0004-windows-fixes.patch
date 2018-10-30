@@ -1,7 +1,7 @@
 From fd118580d30051366d273c51b53e0a41cfd5c51c Mon Sep 17 00:00:00 2001
 From: Jonathan Helmus <jjhelmus@gmail.com>
 Date: Tue, 30 Oct 2018 10:31:35 -0500
-Subject: [PATCH 4/5] windows fixes
+Subject: [PATCH 4/6] windows fixes
 
 ---
  plugins/NTMakefile     |  2 +-
