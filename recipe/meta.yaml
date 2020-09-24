@@ -82,7 +82,12 @@ requirements:
     # https://github.com/cyrusimap/cyrus-sasl/files/1615142/makeinit.zip
     # - posix  # [win]
 {% if from_source_control == 'yes' %}
-    # - git
+    - git
+{% else %}
+    - patch  # [unix]
+    - m2-bash  # [win]
+    - m2-patch  # [win]
+    - m2-gcc-libs  # [win]
 {% endif %}
     - libtool  # [unix]
     - pkg-config  # [unix]
