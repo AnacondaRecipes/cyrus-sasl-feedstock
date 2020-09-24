@@ -63,3 +63,8 @@ nmake /f NTMakefile ^
         SRP=1 ^
         OTP=1 ^
         install
+
+pushd %LIBRARY_BIN%
+:: These are autoloaded, so need to be beside the exes.
+copy sasl2\*.dll .
+move testsuite.exe cyrus-sasl-testsuite.exe
