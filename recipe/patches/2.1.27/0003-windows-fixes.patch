@@ -1,0 +1,39 @@
+From 81f72b71b96a6ace163a515fe5ee198eb5db3ebf Mon Sep 17 00:00:00 2001
+From: Jonathan Helmus <jjhelmus@gmail.com>
+Date: Tue, 30 Oct 2018 10:31:35 -0500
+Subject: [PATCH 3/8] windows fixes
+
+---
+ plugins/NTMakefile | 2 +-
+ win32/common.mak   | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/plugins/NTMakefile b/plugins/NTMakefile
+index 3bf715a3..bab0352f 100755
+--- a/plugins/NTMakefile
++++ b/plugins/NTMakefile
+@@ -39,7 +39,7 @@ SQLITE_LIBS = /libpath:$(SQLITE_LIBPATH) libsqlite.lib
+ !IF "$(SQL)" == "SQLITE3"
+ PLUGINS_EXT=$(PLUGINS_EXT) saslSQLITE.dll
+ SQL_FLAGS= $(SQLITE_INCLUDES3) /DHAVE_SQLITE3=1
+-SQLITE_LIBS = /libpath:$(SQLITE_LIBPATH3) libsqlite3.lib
++SQLITE_LIBS = /libpath:$(SQLITE_LIBPATH3) sqlite3.lib
+ !ENDIF
+ 
+ PLUGINS=saslANONYMOUS.dll \
+diff --git a/win32/common.mak b/win32/common.mak
+index 194dfe95..3b4dc6d8 100644
+--- a/win32/common.mak
++++ b/win32/common.mak
+@@ -45,7 +45,7 @@ TARGET_WIN_SYSTEM=0
+ 
+ # prefix variable is currently only being used by install target
+ !IF "$(prefix)" == ""
+-prefix=C:\CMU
++prefix=$(LIBRARY_PREFIX)
+ !IF "$(VERBOSE)" != "0"
+ !MESSAGE Default installation directory is $(prefix).
+ !ENDIF 
+-- 
+2.28.0.windows.1
+
