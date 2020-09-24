@@ -1,4 +1,4 @@
-From 9ccd9a0a8d816f36bc61b5703eecbae6b926cd82 Mon Sep 17 00:00:00 2001
+From c1c99e2cbdbfab05c947a616a70978dbbc0137a6 Mon Sep 17 00:00:00 2001
 From: Jonathan Helmus <jjhelmus@gmail.com>
 Date: Tue, 30 Oct 2018 11:05:43 -0500
 Subject: [PATCH 5/7] openssl 1.1.1 support
@@ -23,7 +23,7 @@ xref: https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=225891
  create mode 100644 crypto-compat.h
 
 diff --git a/Makefile.am b/Makefile.am
-index 2e782171..313ddcae 100644
+index 2e78217..313ddca 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -71,6 +71,11 @@ EXTRA_DIST=config cmulocal win32 mac dlcompat-20010505 NTMakefile INSTALL.TXT \
@@ -40,7 +40,7 @@ index 2e782171..313ddcae 100644
  	@find $(distdir) -name CVS -print | xargs -t rm -rf
 diff --git a/crypto-compat.c b/crypto-compat.c
 new file mode 100644
-index 00000000..f4717b6c
+index 0000000..f4717b6
 --- /dev/null
 +++ b/crypto-compat.c
 @@ -0,0 +1,446 @@
@@ -492,7 +492,7 @@ index 00000000..f4717b6c
 +#endif /* HAVE_OPENSSL && OPENSSL_VERSION_NUMBER */
 diff --git a/crypto-compat.h b/crypto-compat.h
 new file mode 100644
-index 00000000..73424ad7
+index 0000000..73424ad
 --- /dev/null
 +++ b/crypto-compat.h
 @@ -0,0 +1,73 @@
@@ -570,7 +570,7 @@ index 00000000..73424ad7
 +
 +#endif /* LIBCRYPTO_COMPAT_H */
 diff --git a/lib/Makefile.am b/lib/Makefile.am
-index fcc99b66..6c24bc0b 100644
+index fcc99b6..6c24bc0 100644
 --- a/lib/Makefile.am
 +++ b/lib/Makefile.am
 @@ -65,8 +65,8 @@ lib_LTLIBRARIES = libsasl2.la
@@ -585,7 +585,7 @@ index fcc99b66..6c24bc0b 100644
  install-exec-hook:
  
 diff --git a/plugins/Makefile.am b/plugins/Makefile.am
-index d570de1c..09f064f1 100644
+index d570de1..09f064f 100644
 --- a/plugins/Makefile.am
 +++ b/plugins/Makefile.am
 @@ -53,6 +53,7 @@ INCLUDES=-I$(top_srcdir)/include -I$(top_srcdir)/lib -I$(top_srcdir)/sasldb -I$(
@@ -624,7 +624,7 @@ index d570de1c..09f064f1 100644
  # Auxprop Plugins
  libsasldb_la_SOURCES = sasldb.c sasldb_init.c $(common_sources)
 diff --git a/plugins/ntlm.c b/plugins/ntlm.c
-index 79ea47ca..5c25879b 100644
+index 79ea47c..5c25879 100644
 --- a/plugins/ntlm.c
 +++ b/plugins/ntlm.c
 @@ -417,6 +417,29 @@ static unsigned char *P24(unsigned char *P24, unsigned char *P21,
@@ -702,7 +702,7 @@ index 79ea47ca..5c25879b 100644
  }
  
 diff --git a/plugins/otp.c b/plugins/otp.c
-index dd730651..6d84bed5 100644
+index dd73065..6d84bed 100644
 --- a/plugins/otp.c
 +++ b/plugins/otp.c
 @@ -96,6 +96,28 @@ static algorithm_option_t algorithm_options[] = {
@@ -947,7 +947,7 @@ index dd730651..6d84bed5 100644
  }
  
 diff --git a/plugins/passdss.c b/plugins/passdss.c
-index 4304f481..da37618e 100644
+index 4304f48..da37618 100644
 --- a/plugins/passdss.c
 +++ b/plugins/passdss.c
 @@ -71,6 +71,9 @@
@@ -1671,7 +1671,7 @@ index 4304f481..da37618e 100644
  
  	_plug_decode_init(&text->decode_context, text->utils,
 diff --git a/plugins/srp.c b/plugins/srp.c
-index a07561c6..7ea10009 100644
+index a07561c..7ea1000 100644
 --- a/plugins/srp.c
 +++ b/plugins/srp.c
 @@ -89,6 +89,9 @@ typedef unsigned short uint32;
@@ -2717,7 +2717,7 @@ index a07561c6..7ea10009 100644
  			 text->client_options, "", 0,
  			 myM2, &myM2len);
 diff --git a/saslauthd/Makefile.am b/saslauthd/Makefile.am
-index ce1e92bc..b3a7dc3b 100644
+index ce1e92b..b3a7dc3 100644
 --- a/saslauthd/Makefile.am
 +++ b/saslauthd/Makefile.am
 @@ -2,6 +2,8 @@ AUTOMAKE_OPTIONS = 1.7
@@ -2748,7 +2748,7 @@ index ce1e92bc..b3a7dc3b 100644
  
  
 diff --git a/saslauthd/lak.c b/saslauthd/lak.c
-index 419a6584..f366fc0e 100644
+index 419a658..f366fc0 100644
 --- a/saslauthd/lak.c
 +++ b/saslauthd/lak.c
 @@ -53,6 +53,9 @@
@@ -2762,5 +2762,5 @@ index 419a6584..f366fc0e 100644
  
  #define LDAP_DEPRECATED 1
 -- 
-2.28.0.windows.1
+2.23.0
 

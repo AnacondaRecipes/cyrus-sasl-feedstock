@@ -1,4 +1,4 @@
-From 5bca5895106bfe6388d4fc8b9b19ba83a62b9201 Mon Sep 17 00:00:00 2001
+From c1f0b48c662ed4ff1c5fa4701b4723429ff13c44 Mon Sep 17 00:00:00 2001
 From: Jonathan Helmus <jjhelmus@gmail.com>
 Date: Tue, 30 Oct 2018 10:31:35 -0500
 Subject: [PATCH 4/7] windows fixes
@@ -10,7 +10,7 @@ Subject: [PATCH 4/7] windows fixes
  3 files changed, 16 insertions(+), 18 deletions(-)
 
 diff --git a/plugins/NTMakefile b/plugins/NTMakefile
-index 32dc58eb..36675c65 100755
+index 32dc58e..36675c6 100755
 --- a/plugins/NTMakefile
 +++ b/plugins/NTMakefile
 @@ -39,7 +39,7 @@ SQLITE_LIBS = /libpath:$(SQLITE_LIBPATH) libsqlite.lib
@@ -23,7 +23,7 @@ index 32dc58eb..36675c65 100755
  
  PLUGINS=saslANONYMOUS.dll \
 diff --git a/win32/common.mak b/win32/common.mak
-index c2a9338b..24712898 100644
+index c2a9338..2471289 100644
 --- a/win32/common.mak
 +++ b/win32/common.mak
 @@ -45,7 +45,7 @@ TARGET_WIN_SYSTEM=0
@@ -144,7 +144,7 @@ index c2a9338b..24712898 100644
  
  incremental=no
 diff --git a/win32/include/config.h b/win32/include/config.h
-index 0ad9628f..bd2cecc3 100644
+index 0ad9628..bd2cecc 100644
 --- a/win32/include/config.h
 +++ b/win32/include/config.h
 @@ -117,7 +117,9 @@ typedef int		    intptr_t;
@@ -158,5 +158,5 @@ index 0ad9628f..bd2cecc3 100644
  
  #define MAXHOSTNAMELEN 1024
 -- 
-2.28.0.windows.1
+2.23.0
 

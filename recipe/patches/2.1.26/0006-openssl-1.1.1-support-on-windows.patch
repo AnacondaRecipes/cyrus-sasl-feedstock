@@ -1,4 +1,4 @@
-From c994344ed1d265df3050aef7641e85c0d232f75e Mon Sep 17 00:00:00 2001
+From 0992f6572e583d4d724a42169f54e439271fafcc Mon Sep 17 00:00:00 2001
 From: Jonathan Helmus <jjhelmus@gmail.com>
 Date: Tue, 30 Oct 2018 14:26:59 -0500
 Subject: [PATCH 6/7] openssl 1.1.1 support on windows
@@ -8,7 +8,7 @@ Subject: [PATCH 6/7] openssl 1.1.1 support on windows
  1 file changed, 10 insertions(+), 3 deletions(-)
 
 diff --git a/plugins/NTMakefile b/plugins/NTMakefile
-index 36675c65..64697259 100755
+index 36675c6..6469725 100755
 --- a/plugins/NTMakefile
 +++ b/plugins/NTMakefile
 @@ -64,6 +64,9 @@ compat_objs = getaddrinfo.obj getnameinfo.obj
@@ -53,5 +53,5 @@ index 36675c65..64697259 100755
  
  saslANONYMOUS.dll: $(saslANONYMOUS_objs) saslANONYMOUS.res
 -- 
-2.28.0.windows.1
+2.23.0
 

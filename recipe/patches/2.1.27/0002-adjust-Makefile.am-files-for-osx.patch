@@ -1,4 +1,4 @@
-From 225a378d498a46edb28d0864c444b37801ba2380 Mon Sep 17 00:00:00 2001
+From ee560868bea4d03f92879880f08012e19955d067 Mon Sep 17 00:00:00 2001
 From: Jonathan Helmus <jjhelmus@gmail.com>
 Date: Tue, 30 Oct 2018 10:24:54 -0500
 Subject: [PATCH 2/8] adjust Makefile.am files for osx
@@ -10,7 +10,7 @@ Subject: [PATCH 2/8] adjust Makefile.am files for osx
  3 files changed, 28 deletions(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index 83dae6f8..ad36a2f6 100644
+index 83dae6f..ad36a2f 100644
 --- a/Makefile.am
 +++ b/Makefile.am
 @@ -64,11 +64,6 @@ JAV = java
@@ -42,7 +42,7 @@ index 83dae6f8..ad36a2f6 100644
  .PHONY: clean-sphinx-cache clean-docsrc
  clean-sphinx-cache:
 diff --git a/include/Makefile.am b/include/Makefile.am
-index c942efa9..d401f4b5 100644
+index c942efa..d401f4b 100644
 --- a/include/Makefile.am
 +++ b/include/Makefile.am
 @@ -64,11 +64,5 @@ BUILT_SOURCES = md5global.h
@@ -58,7 +58,7 @@ index c942efa9..d401f4b5 100644
  # TODO: automake, don't build it
  makemd5$(EXEEXT):
 diff --git a/lib/Makefile.am b/lib/Makefile.am
-index 72ada6d4..65043888 100644
+index 72ada6d..6504388 100644
 --- a/lib/Makefile.am
 +++ b/lib/Makefile.am
 @@ -86,15 +86,7 @@ if BUILD_LIBOBJ
@@ -78,5 +78,5 @@ index 72ada6d4..65043888 100644
  libsasl2.a: libsasl2.la $(SASL_STATIC_OBJS)
  	@echo adding static plugins and dependencies
 -- 
-2.28.0.windows.1
+2.23.0
 

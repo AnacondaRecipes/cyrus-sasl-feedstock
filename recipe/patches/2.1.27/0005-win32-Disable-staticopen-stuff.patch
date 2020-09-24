@@ -1,4 +1,4 @@
-From 96ab3c66f1bdb844894e42f41d8587842c9c7589 Mon Sep 17 00:00:00 2001
+From 78cfa69943816d1d6eedf28fa336bb9af30b3910 Mon Sep 17 00:00:00 2001
 From: Ray Donnelly <mingw.android@gmail.com>
 Date: Thu, 24 Sep 2020 12:36:06 +0200
 Subject: [PATCH 5/8] win32: Disable staticopen stuff
@@ -8,7 +8,7 @@ Subject: [PATCH 5/8] win32: Disable staticopen stuff
  1 file changed, 4 insertions(+)
 
 diff --git a/lib/staticopen.h b/lib/staticopen.h
-index d1983163..de9eab0d 100644
+index d198316..de9eab0 100644
 --- a/lib/staticopen.h
 +++ b/lib/staticopen.h
 @@ -76,6 +76,7 @@ sasl_canonuser_init_t x##_canonuser_plug_init
@@ -39,5 +39,5 @@ index d1983163..de9eab0d 100644
  	{ UNKNOWN, NULL, NULL }
  };
 -- 
-2.28.0.windows.1
+2.23.0
 

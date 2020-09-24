@@ -1,4 +1,4 @@
-From 6e431ed296f02627911f4ca880a8b459549c7f88 Mon Sep 17 00:00:00 2001
+From c150bdfdad693d09ad198cc5e49c52a8fb910c0a Mon Sep 17 00:00:00 2001
 From: Ray Donnelly <mingw.android@gmail.com>
 Date: Thu, 24 Sep 2020 16:06:48 +0200
 Subject: [PATCH 8/8] Commit the plugin_init.c files
@@ -36,7 +36,7 @@ Subject: [PATCH 8/8] Commit the plugin_init.c files
  create mode 100644 plugins/srp_init.c
 
 diff --git a/plugins/.gitignore b/plugins/.gitignore
-index a4056e4b..0ea911f0 100644
+index a4056e4..0ea911f 100644
 --- a/plugins/.gitignore
 +++ b/plugins/.gitignore
 @@ -3,4 +3,4 @@ Makefile
@@ -47,7 +47,7 @@ index a4056e4b..0ea911f0 100644
 +# *_init.c
 diff --git a/plugins/anonymous_init.c b/plugins/anonymous_init.c
 new file mode 100644
-index 00000000..215cc20b
+index 0000000..215cc20
 --- /dev/null
 +++ b/plugins/anonymous_init.c
 @@ -0,0 +1,43 @@
@@ -96,7 +96,7 @@ index 00000000..215cc20b
 +
 diff --git a/plugins/crammd5_init.c b/plugins/crammd5_init.c
 new file mode 100644
-index 00000000..c5382f81
+index 0000000..c5382f8
 --- /dev/null
 +++ b/plugins/crammd5_init.c
 @@ -0,0 +1,43 @@
@@ -145,7 +145,7 @@ index 00000000..c5382f81
 +
 diff --git a/plugins/digestmd5_init.c b/plugins/digestmd5_init.c
 new file mode 100644
-index 00000000..25c4356a
+index 0000000..25c4356
 --- /dev/null
 +++ b/plugins/digestmd5_init.c
 @@ -0,0 +1,43 @@
@@ -194,7 +194,7 @@ index 00000000..25c4356a
 +
 diff --git a/plugins/gs2_init.c b/plugins/gs2_init.c
 new file mode 100644
-index 00000000..31060613
+index 0000000..3106061
 --- /dev/null
 +++ b/plugins/gs2_init.c
 @@ -0,0 +1,43 @@
@@ -243,7 +243,7 @@ index 00000000..31060613
 +
 diff --git a/plugins/gssapiv2_init.c b/plugins/gssapiv2_init.c
 new file mode 100644
-index 00000000..04c9a15e
+index 0000000..04c9a15
 --- /dev/null
 +++ b/plugins/gssapiv2_init.c
 @@ -0,0 +1,43 @@
@@ -292,7 +292,7 @@ index 00000000..04c9a15e
 +
 diff --git a/plugins/kerberos4_init.c b/plugins/kerberos4_init.c
 new file mode 100644
-index 00000000..10580333
+index 0000000..1058033
 --- /dev/null
 +++ b/plugins/kerberos4_init.c
 @@ -0,0 +1,43 @@
@@ -341,7 +341,7 @@ index 00000000..10580333
 +
 diff --git a/plugins/login_init.c b/plugins/login_init.c
 new file mode 100644
-index 00000000..cad75752
+index 0000000..cad7575
 --- /dev/null
 +++ b/plugins/login_init.c
 @@ -0,0 +1,43 @@
@@ -390,7 +390,7 @@ index 00000000..cad75752
 +
 diff --git a/plugins/ntlm_init.c b/plugins/ntlm_init.c
 new file mode 100644
-index 00000000..a336fda8
+index 0000000..a336fda
 --- /dev/null
 +++ b/plugins/ntlm_init.c
 @@ -0,0 +1,43 @@
@@ -439,7 +439,7 @@ index 00000000..a336fda8
 +
 diff --git a/plugins/otp_init.c b/plugins/otp_init.c
 new file mode 100644
-index 00000000..cd116849
+index 0000000..cd11684
 --- /dev/null
 +++ b/plugins/otp_init.c
 @@ -0,0 +1,43 @@
@@ -488,7 +488,7 @@ index 00000000..cd116849
 +
 diff --git a/plugins/passdss_init.c b/plugins/passdss_init.c
 new file mode 100644
-index 00000000..3a35fb72
+index 0000000..3a35fb7
 --- /dev/null
 +++ b/plugins/passdss_init.c
 @@ -0,0 +1,43 @@
@@ -537,7 +537,7 @@ index 00000000..3a35fb72
 +
 diff --git a/plugins/plain_init.c b/plugins/plain_init.c
 new file mode 100644
-index 00000000..0ca8f58b
+index 0000000..0ca8f58
 --- /dev/null
 +++ b/plugins/plain_init.c
 @@ -0,0 +1,43 @@
@@ -586,7 +586,7 @@ index 00000000..0ca8f58b
 +
 diff --git a/plugins/sasldb_init.c b/plugins/sasldb_init.c
 new file mode 100644
-index 00000000..c75e1a89
+index 0000000..c75e1a8
 --- /dev/null
 +++ b/plugins/sasldb_init.c
 @@ -0,0 +1,38 @@
@@ -630,7 +630,7 @@ index 00000000..c75e1a89
 +
 diff --git a/plugins/scram_init.c b/plugins/scram_init.c
 new file mode 100644
-index 00000000..c5d828bd
+index 0000000..c5d828b
 --- /dev/null
 +++ b/plugins/scram_init.c
 @@ -0,0 +1,43 @@
@@ -679,7 +679,7 @@ index 00000000..c5d828bd
 +
 diff --git a/plugins/srp_init.c b/plugins/srp_init.c
 new file mode 100644
-index 00000000..305dcb3e
+index 0000000..305dcb3
 --- /dev/null
 +++ b/plugins/srp_init.c
 @@ -0,0 +1,43 @@
@@ -727,5 +727,5 @@ index 00000000..305dcb3e
 +SASL_SERVER_PLUG_INIT( srp )
 +
 -- 
-2.28.0.windows.1
+2.23.0
 

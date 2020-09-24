@@ -1,4 +1,4 @@
-From 556425a05edf8702b4638a6b7926d2245d0a2e76 Mon Sep 17 00:00:00 2001
+From 94ff238911ac1b6fc07000b357cc3e9c0f62e64a Mon Sep 17 00:00:00 2001
 From: Ray Donnelly <mingw.android@gmail.com>
 Date: Thu, 24 Sep 2020 19:28:23 +0200
 Subject: [PATCH 7/8] win32: Skip building documentation (doc folder has no
@@ -9,7 +9,7 @@ Subject: [PATCH 7/8] win32: Skip building documentation (doc folder has no
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/NTMakefile b/NTMakefile
-index d3aac8a0..7d216340 100644
+index d3aac8a..7d21634 100644
 --- a/NTMakefile
 +++ b/NTMakefile
 @@ -46,7 +46,9 @@
@@ -24,5 +24,5 @@ index d3aac8a0..7d216340 100644
  all-first: all
  
 -- 
-2.28.0.windows.1
+2.23.0
 

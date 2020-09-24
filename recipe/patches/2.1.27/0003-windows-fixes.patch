@@ -1,4 +1,4 @@
-From 81f72b71b96a6ace163a515fe5ee198eb5db3ebf Mon Sep 17 00:00:00 2001
+From 96878b52ea9c27220698c13ff58739bbcf90330e Mon Sep 17 00:00:00 2001
 From: Jonathan Helmus <jjhelmus@gmail.com>
 Date: Tue, 30 Oct 2018 10:31:35 -0500
 Subject: [PATCH 3/8] windows fixes
@@ -9,7 +9,7 @@ Subject: [PATCH 3/8] windows fixes
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/plugins/NTMakefile b/plugins/NTMakefile
-index 3bf715a3..bab0352f 100755
+index 3bf715a..bab0352 100755
 --- a/plugins/NTMakefile
 +++ b/plugins/NTMakefile
 @@ -39,7 +39,7 @@ SQLITE_LIBS = /libpath:$(SQLITE_LIBPATH) libsqlite.lib
@@ -22,7 +22,7 @@ index 3bf715a3..bab0352f 100755
  
  PLUGINS=saslANONYMOUS.dll \
 diff --git a/win32/common.mak b/win32/common.mak
-index 194dfe95..3b4dc6d8 100644
+index 194dfe9..3b4dc6d 100644
 --- a/win32/common.mak
 +++ b/win32/common.mak
 @@ -45,7 +45,7 @@ TARGET_WIN_SYSTEM=0
@@ -35,5 +35,5 @@ index 194dfe95..3b4dc6d8 100644
  !MESSAGE Default installation directory is $(prefix).
  !ENDIF 
 -- 
-2.28.0.windows.1
+2.23.0
 
