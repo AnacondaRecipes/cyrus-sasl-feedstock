@@ -8,6 +8,10 @@ if [[ ${target_platform} == osx-64 ]]; then
   DISABLE_MACOS_FRAMEWORK=--disable-macos-framework
 fi
 
+if [[ ${target_platform} == linux-aarch64 ]]; then
+  export LDFLAGS="$LDFLAGS -L/usr/lib64"
+fi
+
 if [[ ${target_platform} =~ .*ppc.* ]]; then
   # We should probably run autoreconf here instead, but I am tired of this software.
   BUILD_FLAG="--build=${HOST}"
