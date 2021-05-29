@@ -61,7 +61,7 @@ source:
 {% endif %}
 
 build:
-  number: 7
+  number: 8
   missing_dso_whitelist:          # [osx]
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libpam.2.dylib     # [osx]
@@ -96,13 +96,13 @@ requirements:
     - make  # [unix]
     - groff  # [unix]
   host:
-    - krb5  # [unix and not ppc64le]
+    - krb5  # [unix]
     - libdb
     - openssl
     - sqlite  # [win]
     - ldap3  # [win]
   run:
-    - krb5  # [unix and not ppc64le]
+    - krb5  # [unix]
     - libdb
     - openssl
     
