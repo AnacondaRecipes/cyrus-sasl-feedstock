@@ -1,13 +1,13 @@
 {% set name = "cyrus-sasl" %}
-{% set version = "2.1.27" %}
+{% set version = "2.1.28" %}
 {% if version == "2.1.27" %}
-{%   set hash = "b564d773803dc4cff42d2bdc04c80f2b105897a724c247817d4e4a99dd6b9976" %}
+{% set hash = "ecc7caa6a196025e40d924b5708dd83d" %}
 {%   set hashtype = "sha256" %}
 {%   set from_source_control = "no" %}
 {%   set url_dir = "https://github.com/cyrusimap/cyrus-sasl/archive" %}
 {% else %}
-{%   set hash = "7c14d1b5bd1434adf2dd79f70538617e6aa2a7bde447454b90b84ac5c4d034ba" %}
-{%   set hash = "a7f4e5e559a0e37b3ffc438c9456e425" %}
+{% set hash = "ecc7caa6a196025e40d924b5708dd83d" %}
+{% set hash = "ecc7caa6a196025e40d924b5708dd83d" %}
 {%   set hashtype = "md5" %}
 {%   set from_source_control = "no" %}
 {%   set url_dir = "https://ftp.osuosl.org/pub/blfs/conglomeration/cyrus-sasl" %}
