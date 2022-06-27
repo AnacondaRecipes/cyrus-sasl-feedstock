@@ -36,7 +36,8 @@ build:
     # SONAME was changed once in a patch release but it was 6 years ago so
     # giving them the benefit of the doubt that it was a one-off mistake.
     - {{ pin_subpackage('cyrus-sasl') }}
-
+  # no groff on s390x ...
+  skip: True  # [s390x]
 requirements:
   build:
     - {{ compiler('c') }}
