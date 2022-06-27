@@ -26,6 +26,8 @@ source:
     
 build:
   number: 0
+  # no groff on s390x ...
+  skip: True  # [linux and s390x]
   missing_dso_whitelist:          # [osx]
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libpam.2.dylib     # [osx]
@@ -39,8 +41,7 @@ build:
     # SONAME was changed once in a patch release but it was 6 years ago so
     # giving them the benefit of the doubt that it was a one-off mistake.
     - {{ pin_subpackage('cyrus-sasl') }}
-  # no groff on s390x ...
-  skip: True  # [s390x]
+
 requirements:
   build:
     - {{ compiler('c') }}
