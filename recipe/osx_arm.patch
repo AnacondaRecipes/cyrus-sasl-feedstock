@@ -1,0 +1,13 @@
+diff --git a/m4/sasl2.m4 b/m4/sasl2.m4
+index 56e0504..dd24c24 100644
+--- a/m4/sasl2.m4
++++ b/m4/sasl2.m4
+@@ -339,7 +339,7 @@ int main(void)
+ ],	
+ 	[ AC_DEFINE(HAVE_GSS_SPNEGO,,[Define if your GSSAPI implementation supports SPNEGO])
+ 	AC_MSG_RESULT(yes) ],
+-	AC_MSG_RESULT(no))
++	AC_MSG_RESULT(no), AC_MSG_RESULT(yes))
+   LIBS="$cmu_save_LIBS"
+ 
+ else

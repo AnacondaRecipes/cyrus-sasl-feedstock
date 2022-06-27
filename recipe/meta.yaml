@@ -1,70 +1,41 @@
 {% set name = "cyrus-sasl" %}
 {% set version = "2.1.27" %}
-{% if version == "2.1.27" %}
-{%   set hash = "b564d773803dc4cff42d2bdc04c80f2b105897a724c247817d4e4a99dd6b9976" %}
-{%   set hashtype = "sha256" %}
-{%   set from_source_control = "no" %}
-{%   set url_dir = "https://github.com/cyrusimap/cyrus-sasl/archive" %}
-{% else %}
-{%   set hash = "7c14d1b5bd1434adf2dd79f70538617e6aa2a7bde447454b90b84ac5c4d034ba" %}
-{%   set hash = "a7f4e5e559a0e37b3ffc438c9456e425" %}
-{%   set hashtype = "md5" %}
-{%   set from_source_control = "no" %}
-{%   set url_dir = "https://ftp.osuosl.org/pub/blfs/conglomeration/cyrus-sasl" %}
-{% endif %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-{% if from_source_control == 'yes' %}
-  - git_url: https://github.com/cyrusimap/cyrus-sasl.git
-    git_tag: cyrus-sasl-{{ version }}
-{% else %}
-  - url: {{ url_dir }}/cyrus-sasl-{{ version }}.tar.gz
-    {{ hashtype }}: {{ hash }}
-{% endif %}
-    patches:
-{% if version == "2.1.27" %}
-      - patches/{{ version }}/0001-Include-stddef-in-sasl.h-for-size_t.patch
-      - patches/{{ version }}/0002-adjust-Makefile.am-files-for-osx.patch
-      - patches/{{ version }}/0003-windows-fixes.patch
-      - patches/{{ version }}/0004-openssl-1.1.1-support-on-windows.patch
-      - patches/{{ version }}/0005-win32-Disable-staticopen-stuff.patch
-      - patches/{{ version }}/0006-win32-Define-GCC_FALLTHROUGH.patch
-      - patches/{{ version }}/0007-win32-Skip-building-documentation-doc-folder-has-no-.patch
-{% if from_source_control == 'yes' %}
-      - patches/{{ version }}/0008-Commit-the-plugin_init.c-files.patch
-{% endif %}
-{% else %}
-      - patches/{{ version }}/0001-Include-stddef-in-sasl.h-for-size_t.patch
-      - patches/{{ version }}/0002-adjust-Makefile.am-files-for-osx.patch
-      - patches/{{ version }}/0003-fix-CVE-2013-4122.patch
-      - patches/{{ version }}/0004-windows-fixes.patch
-      - patches/{{ version }}/0005-openssl-1.1.1-support.patch
-      - patches/{{ version }}/0006-openssl-1.1.1-support-on-windows.patch
-      # The release tarball contains these files, source control does not.
-      # configure on Unix generates them. We can also generate them in bld.bat
-{% if from_source_control == 'yes' %}
-      - patches/{{ version }}/0007-Commit-the-plugin_init.c-files.patch
-{% endif %}
-  # Necessary if you need to re-autoconfigure a not-from-source-control build.
-  - git_url: https://github.com/cyrusimap/cyrus-sasl.git
-    folder: git-master
-  - url: http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.guess;hb=HEAD
-    fn: config.guess
-    sha256: 3512ebcecded7cd11e6ce5594accf315ed1c582310fddd00cafcd4bb9c0218f2
-  - url: http://git.savannah.gnu.org/gitweb/?p=config.git;a=blob_plain;f=config.sub;hb=HEAD
-    fn: config.sub
-    sha256: fda8e5ddb44c25e3b813d3c67e2744e9e3aedac8b3304934644d81c88a698b36
-{% endif %}
-
+  # The source releases are strange.  Lets use the tagged source tarball instead
+  # - url: https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-{{ version }}/cyrus-sasl-{{ version }}.tar.gz
+  #   sha256: 26866b1549b00ffd020f188a43c258017fa1c382b3ddadd8201536f72efb05d5
+  # - url: ftp://ftp.cyrusimap.org/cyrus-sasl/{{ name }}-{{ version }}.tar.gz
+  
+  url: https://github.com/cyrusimap/cyrus-sasl/archive/cyrus-sasl-{{ version }}.tar.gz
+  sha256: b564d773803dc4cff42d2bdc04c80f2b105897a724c247817d4e4a99dd6b9976
+  
+  patches:
+    - osx_arm.patch  # [osx]
+    - patches/0001-Include-stddef-in-sasl.h-for-size_t.patch  # [win]
+    - patches/0002-adjust-Makefile.am-files-for-osx.patch  # [win]
+    - patches/0003-windows-fixes.patch  # [win]
+    - patches/0004-openssl-1.1.1-support-on-windows.patch  # [win]
+    - patches/0005-win32-Disable-staticopen-stuff.patch  # [win]
+    - patches/0006-win32-Define-GCC_FALLTHROUGH.patch  # [win]
+    - patches/0007-win32-Skip-building-documentation-doc-folder-has-no-.patch  # [win]
+    
 build:
-  number: 8
+  number: 0
+  # no groff on s390x ...
+  skip: True  # [linux and s390x]
   missing_dso_whitelist:          # [osx]
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libpam.2.dylib     # [osx]
+  ignore_run_exports:             # [unix or win]
+    - libntlm                     # [unix]
+    - libdb                       # [win]
+    - sqlite                      # [win]
+    - openssl                     # [win]
   run_exports:
     # https://abi-laboratory.pro/tracker/timeline/cyrus-sasl/
     # SONAME was changed once in a patch release but it was 6 years ago so
@@ -75,40 +46,34 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    # We must run:
-    # /bin/sh ./makeinit.sh {anonymous,crammd5,scram,gssapiv2,kerberos4,login,ntlm,otp,passdss,plain,sasldb,srp,gs2}_init.c
-    # See also:
-    # https://github.com/cyrusimap/cyrus-sasl/issues/499
-    # https://github.com/cyrusimap/cyrus-sasl/files/1615142/makeinit.zip
-    # - posix  # [win]
-{% if from_source_control == 'yes' %}
-    - git
-{% else %}
-    - patch  # [unix]
-    - m2-bash  # [win]
-    - m2-patch  # [win]
-    - m2-gcc-libs  # [win]
-{% endif %}
     - libtool  # [unix]
     - pkg-config  # [unix]
     - automake  # [unix]
     - autoconf  # [unix]
     - make  # [unix]
     - groff  # [unix]
+    - patch  # [unix]
+    - git    # [unix]
+    - m2-bash  # [win]
+    - m2-patch  # [win]
+    - m2-gcc-libs  # [win]
   host:
     - krb5  # [unix]
-    - libdb
     - openssl
+    - libdb ==6.2.*  # [win]
+    - libntlm  # [unix]
     - sqlite  # [win]
     - ldap3  # [win]
   run:
-    - krb5  # [unix]
-    - libdb
+    - krb5
     - openssl
+    - libntlm  # [unix]
+    - libdb  # [win]
     
 test:
   commands:
-    - echo "Skipped bin/cyrus-sasl-testsuite as it fails. Feel free to investigate this"
+    - echo "DONE"
+    - if not exist %LIBRARY_LIB%\\libsasl.lib exit 1  # [win]
 
 about:
   home: https://www.cyrusimap.org/sasl/
@@ -132,3 +97,4 @@ extra:
     - martindurant
     - mingwandroid
     - wesm
+    - StephenSmith25

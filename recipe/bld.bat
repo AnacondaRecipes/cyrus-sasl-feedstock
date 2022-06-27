@@ -55,7 +55,7 @@ xcopy /I /F /Y common\crypto-compat.h plugins
 
 nmake /f NTMakefile ^
         VERBOSE=1 ^
-        DB_LIB=libdb61.lib ^
+        DB_LIB=libdb62.lib ^
         STATIC=no ^
         NTLM=1 ^
         GSSAPI=MIT ^
