@@ -15,11 +15,6 @@ source:
   sha256: b564d773803dc4cff42d2bdc04c80f2b105897a724c247817d4e4a99dd6b9976
   
   patches:
-    # - 0001-Include-stddef-in-sasl-h-for-size_t.patch
-    # Patches for disabling framework things
-    #- makefile.patch  # [osx]
-    #- include_makefile.patch  # [osx]
-    #- lib_makefile.patch  # [osx]
     - osx_arm.patch  # [osx]
     - patches/0001-Include-stddef-in-sasl.h-for-size_t.patch  # [win]
     - patches/0002-adjust-Makefile.am-files-for-osx.patch  # [win]
