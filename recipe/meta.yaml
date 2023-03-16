@@ -25,17 +25,12 @@ source:
     - patches/0007-win32-Skip-building-documentation-doc-folder-has-no-.patch  # [win]
     
 build:
-  number: 9
+  number: 10
   # no groff on s390x ...
   skip: True  # [linux and s390x]
   missing_dso_whitelist:          # [osx]
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libpam.2.dylib     # [osx]
-  ignore_run_exports:             # [unix or win]
-    - libntlm                     # [unix]
-    - libdb                       # [win]
-    - sqlite                      # [win]
-    - openssl                     # [win]
   run_exports:
     # https://abi-laboratory.pro/tracker/timeline/cyrus-sasl/
     # SONAME was changed once in a patch release but it was 6 years ago so
@@ -58,17 +53,17 @@ requirements:
     - m2-patch  # [win]
     - m2-gcc-libs  # [win]
   host:
-    - krb5  # [unix]
-    - openssl
+    - krb5 1.19.*
+    - openssl 1.1.1
     - libdb ==6.2.*  # [win]
     - libntlm  # [unix]
-    - sqlite  # [win]
-    - ldap3  # [win]
+    - sqlite 3 # [win]
+    - ldap3 2.9.1  # [win]
   run:
     - krb5
     - openssl
     - libntlm  # [unix]
-    - libdb  # [win]
+    - libdb    # [win]
     
 test:
   commands:
