@@ -14,7 +14,7 @@ source:
   url: https://github.com/cyrusimap/cyrus-sasl/archive/cyrus-sasl-{{ version }}.tar.gz
   sha256: b564d773803dc4cff42d2bdc04c80f2b105897a724c247817d4e4a99dd6b9976
   
-  patches:
+  patches:  # [osx or win]
     - osx_arm.patch  # [osx]
     - patches/0001-Include-stddef-in-sasl.h-for-size_t.patch  # [win]
     - patches/0002-adjust-Makefile.am-files-for-osx.patch  # [win]
@@ -25,17 +25,12 @@ source:
     - patches/0007-win32-Skip-building-documentation-doc-folder-has-no-.patch  # [win]
     
 build:
-  number: 9
+  number: 10
   # no groff on s390x ...
   skip: True  # [linux and s390x]
   missing_dso_whitelist:          # [osx]
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libpam.2.dylib     # [osx]
-  ignore_run_exports:             # [unix or win]
-    - libntlm                     # [unix]
-    - libdb                       # [win]
-    - sqlite                      # [win]
-    - openssl                     # [win]
   run_exports:
     # https://abi-laboratory.pro/tracker/timeline/cyrus-sasl/
     # SONAME was changed once in a patch release but it was 6 years ago so
@@ -46,29 +41,29 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - libtool  # [unix]
-    - pkg-config  # [unix]
-    - automake  # [unix]
-    - autoconf  # [unix]
-    - make  # [unix]
-    - groff  # [unix]
-    - patch  # [unix]
-    - git    # [unix]
-    - m2-bash  # [win]
-    - m2-patch  # [win]
+    - libtool      # [unix]
+    - pkg-config
+    - automake     # [unix]
+    - autoconf     # [unix]
+    - make         # [unix]
+    - groff        # [unix]
+    - patch        # [osx]
+    - git          # [unix]
+    - m2-bash      # [win]
+    - m2-patch     # [win]
     - m2-gcc-libs  # [win]
   host:
-    - krb5  # [unix]
-    - openssl
+    - krb5 1.19.*
+    - openssl 1.1.1
     - libdb ==6.2.*  # [win]
-    - libntlm  # [unix]
-    - sqlite  # [win]
-    - ldap3  # [win]
+    - libntlm 1.5    # [unix]
+    - sqlite 3       # [win]
+    - ldap3 2.9.1    # [win]
   run:
     - krb5
     - openssl
     - libntlm  # [unix]
-    - libdb  # [win]
+    - libdb    # [win]
     
 test:
   commands:
