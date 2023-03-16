@@ -41,24 +41,24 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - libtool  # [unix]
+    - libtool      # [unix]
     - pkg-config
-    - automake  # [unix]
-    - autoconf  # [unix]
-    - make  # [unix]
-    - groff  # [unix]
-    - patch  # [osx]
-    - git    # [unix]
-    - m2-bash  # [win]
-    - m2-patch  # [win]
+    - automake     # [unix]
+    - autoconf     # [unix]
+    - make         # [unix]
+    - groff        # [unix]
+    - patch        # [osx]
+    - git          # [unix]
+    - m2-bash      # [win]
+    - m2-patch     # [win]
     - m2-gcc-libs  # [win]
   host:
     - krb5 1.19.*
     - openssl 1.1.1
     - libdb ==6.2.*  # [win]
-    - libntlm  # [unix]
-    - sqlite 3 # [win]
-    - ldap3 2.9.1  # [win]
+    - libntlm 1.5    # [unix]
+    - sqlite 3       # [win]
+    - ldap3 2.9.1    # [win]
   run:
     - krb5
     - openssl
