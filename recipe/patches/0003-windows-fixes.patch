@@ -9,23 +9,23 @@ Subject: [PATCH 3/8] windows fixes
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/plugins/NTMakefile b/plugins/NTMakefile
-index 3bf715a..bab0352 100755
+index 554e9363..ea2e0889 100755
 --- a/plugins/NTMakefile
 +++ b/plugins/NTMakefile
-@@ -39,7 +39,7 @@ SQLITE_LIBS = /libpath:$(SQLITE_LIBPATH) libsqlite.lib
+@@ -39,7 +39,7 @@ SQLITE_LIBS = "/libpath:$(SQLITE_LIBPATH)" libsqlite.lib
  !IF "$(SQL)" == "SQLITE3"
  PLUGINS_EXT=$(PLUGINS_EXT) saslSQLITE.dll
  SQL_FLAGS= $(SQLITE_INCLUDES3) /DHAVE_SQLITE3=1
--SQLITE_LIBS = /libpath:$(SQLITE_LIBPATH3) libsqlite3.lib
+-SQLITE_LIBS = "/libpath:$(SQLITE_LIBPATH3)" libsqlite3.lib
 +SQLITE_LIBS = /libpath:$(SQLITE_LIBPATH3) sqlite3.lib
  !ENDIF
  
  PLUGINS=saslANONYMOUS.dll \
 diff --git a/win32/common.mak b/win32/common.mak
-index 194dfe9..3b4dc6d 100644
+index d9cc26e9..8a4fc6c1 100644
 --- a/win32/common.mak
 +++ b/win32/common.mak
-@@ -45,7 +45,7 @@ TARGET_WIN_SYSTEM=0
+@@ -49,7 +49,7 @@ TARGET_WIN_SYSTEM=0
  
  # prefix variable is currently only being used by install target
  !IF "$(prefix)" == ""

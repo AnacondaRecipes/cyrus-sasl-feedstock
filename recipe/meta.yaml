@@ -22,7 +22,7 @@ source:
     - patches/0004-openssl-1.1.1-support-on-windows.patch  # [win]
     - patches/0005-win32-Disable-staticopen-stuff.patch  # [win]
     - patches/0006-win32-Define-GCC_FALLTHROUGH.patch  # [win]
-    - patches/0007-win32-Skip-building-documentation-doc-folder-has-no-.patch  # [win]
+    # - patches/0007-win32-Skip-building-documentation-doc-folder-has-no-.patch  # [win]
     
 build:
   number: 0
