@@ -1,5 +1,5 @@
 {% set name = "cyrus-sasl" %}
-{% set version = "2.1.27" %}
+{% set version = "2.1.28" %}
 
 package:
   name: {{ name }}
@@ -12,20 +12,20 @@ source:
   # - url: ftp://ftp.cyrusimap.org/cyrus-sasl/{{ name }}-{{ version }}.tar.gz
   
   url: https://github.com/cyrusimap/cyrus-sasl/archive/cyrus-sasl-{{ version }}.tar.gz
-  sha256: b564d773803dc4cff42d2bdc04c80f2b105897a724c247817d4e4a99dd6b9976
+  sha256: 3e38933a30b9ce183a5488b4f6a5937a702549cde0d3287903d80968ad4ec341
   
-  patches:  # [osx or win]
-    - osx_arm.patch  # [osx]
+  patches:
     - patches/0001-Include-stddef-in-sasl.h-for-size_t.patch  # [win]
     - patches/0002-adjust-Makefile.am-files-for-osx.patch  # [win]
     - patches/0003-windows-fixes.patch  # [win]
     - patches/0004-openssl-1.1.1-support-on-windows.patch  # [win]
     - patches/0005-win32-Disable-staticopen-stuff.patch  # [win]
     - patches/0006-win32-Define-GCC_FALLTHROUGH.patch  # [win]
-    - patches/0007-win32-Skip-building-documentation-doc-folder-has-no-.patch  # [win]
-    
+    - patches/0009-cumulative-digestmd5.patch
+    - patches/0010-cumulative-ossl3.patch
+
 build:
-  number: 10
+  number: 0
   # no groff on s390x ...
   skip: True  # [linux and s390x]
   missing_dso_whitelist:          # [osx]
@@ -47,21 +47,22 @@ requirements:
     - autoconf     # [unix]
     - make         # [unix]
     - groff        # [unix]
-    - patch        # [osx]
+    - patch        # [not win]
+    - m2-patch    # [win]
     - git          # [unix]
     - m2-bash      # [win]
     - m2-patch     # [win]
     - m2-gcc-libs  # [win]
   host:
-    - krb5 1.19.*
-    - openssl 1.1.1
+    - krb5 1.20.1
+    - openssl {{ openssl }}
     - libdb ==6.2.*  # [win]
     - libntlm 1.5    # [unix]
     - sqlite 3       # [win]
     - ldap3 2.9.1    # [win]
   run:
     - krb5
-    - openssl
+    - openssl 3.*
     - libntlm  # [unix]
     - libdb    # [win]
     

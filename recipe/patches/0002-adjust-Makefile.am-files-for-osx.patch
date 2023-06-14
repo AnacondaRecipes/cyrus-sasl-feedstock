@@ -10,12 +10,12 @@ Subject: [PATCH 2/8] adjust Makefile.am files for osx
  3 files changed, 28 deletions(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index 83dae6f..ad36a2f 100644
+index f7d3b22e..d606711c 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -64,11 +64,6 @@ JAV = java
+@@ -59,11 +59,6 @@ SAM = sample
  else
- JAV =
+ SAM =
  endif
 -if MACOSX
 -INSTALLOSX = install-exec-local-osx
@@ -23,9 +23,9 @@ index 83dae6f..ad36a2f 100644
 -INSTALLOSX = 
 -endif
  
- SUBDIRS=include sasldb common lib plugins utils $(PWC) $(SAM) $(JAV) $(SAD)
+ SUBDIRS=include sasldb common lib plugins utils $(PWC) $(SAM) $(SAD)
  EXTRA_DIST=config doc docsrc win32 mac dlcompat-20010505 NTMakefile \
-@@ -148,15 +143,6 @@ dist-hook:
+@@ -143,15 +138,6 @@ dist-hook:
  	find $(top_distdir) -type f -name .sphinx-build.stamp -delete
  	rm -rf $(top_distdir)/$(SPHINX_CACHE)
  
@@ -42,7 +42,7 @@ index 83dae6f..ad36a2f 100644
  .PHONY: clean-sphinx-cache clean-docsrc
  clean-sphinx-cache:
 diff --git a/include/Makefile.am b/include/Makefile.am
-index c942efa..d401f4b 100644
+index c942efa9..d401f4b5 100644
 --- a/include/Makefile.am
 +++ b/include/Makefile.am
 @@ -64,11 +64,5 @@ BUILT_SOURCES = md5global.h
@@ -58,10 +58,10 @@ index c942efa..d401f4b 100644
  # TODO: automake, don't build it
  makemd5$(EXEEXT):
 diff --git a/lib/Makefile.am b/lib/Makefile.am
-index 72ada6d..6504388 100644
+index 9a43ae0d..4258bfcb 100644
 --- a/lib/Makefile.am
 +++ b/lib/Makefile.am
-@@ -86,15 +86,7 @@ if BUILD_LIBOBJ
+@@ -87,15 +87,7 @@ if BUILD_LIBOBJ
  libsasl2_la_LIBADD += libobj.la
  endif
  
