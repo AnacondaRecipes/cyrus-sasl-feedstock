@@ -25,7 +25,7 @@ source:
     - patches/0010-cumulative-ossl3.patch
 
 build:
-  number: 0
+  number: 1
   # no groff on s390x ...
   skip: True  # [linux and s390x]
   missing_dso_whitelist:          # [osx]
@@ -57,15 +57,13 @@ requirements:
     - krb5 1.20.1
     - openssl {{ openssl }}
     - libdb ==6.2.*  # [win]
-    - libntlm 1.5    # [unix]
     - sqlite 3       # [win]
     - ldap3 2.9.1    # [win]
   run:
     - krb5
-    - openssl 3.*
-    - libntlm  # [unix]
+    - openssl  # exact pin handled through openssl run_exports
     - libdb    # [win]
-    
+
 test:
   commands:
     - echo "DONE"
