@@ -25,9 +25,7 @@ source:
     - patches/0010-cumulative-ossl3.patch
 
 build:
-  number: 1
-  # no groff on s390x ...
-  skip: True  # [linux and s390x]
+  number: 2
   missing_dso_whitelist:          # [osx]
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libpam.2.dylib     # [osx]
@@ -39,6 +37,7 @@ build:
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
     - libtool      # [unix]
@@ -48,21 +47,17 @@ requirements:
     - make         # [unix]
     - groff        # [unix]
     - patch        # [not win]
-    - m2-patch    # [win]
+    - m2-patch     # [win]
     - git          # [unix]
     - m2-bash      # [win]
     - m2-patch     # [win]
     - m2-gcc-libs  # [win]
   host:
-    - krb5 1.20.1
+    - krb5 {{ krb5 }}
     - openssl {{ openssl }}
-    - libdb ==6.2.*  # [win]
-    - sqlite 3       # [win]
-    - ldap3 2.9.1    # [win]
-  run:
-    - krb5
-    - openssl  # exact pin handled through openssl run_exports
-    - libdb    # [win]
+    - libdb ==6.2.*        # [win]
+    - sqlite {{ sqlite }}  # [win]
+    - ldap3 2.9.1          # [win]
 
 test:
   commands:
