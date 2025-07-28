@@ -81,9 +81,11 @@ test:
     - test -f $PREFIX/lib/sasl2/libanonymous.so  # [unix]
     - test -f $PREFIX/lib/sasl2/libplain.so  # [unix]
     - test -f $PREFIX/lib/sasl2/libsasldb.so  # [unix]
+    - test -f $PREFIX/lib/sasl2/libgssapiv2.so  # [unix]
     - if not exist %LIBRARY_LIB%\\sasl2\\libanonymous.dll exit 1  # [win]
     - if not exist %LIBRARY_LIB%\\sasl2\\libplain.dll exit 1  # [win]
     - if not exist %LIBRARY_LIB%\\sasl2\\libsasldb.dll exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\sasl2\\libgssapiv2.dll exit 1  # [win]
 
     # Test key binaries exist
     - test -f $PREFIX/sbin/saslauthd  # [unix]
@@ -96,6 +98,44 @@ test:
     # Test that the library can be linked
     - pkg-config --libs libsasl2  # [unix]
     - pkg-config --cflags libsasl2  # [unix]
+    
+    # Test libkrb5-dependent libraries exist
+    - test -f $PREFIX/lib/libkrb5.so  # [linux]
+    - test -f $PREFIX/lib/libgssapi_krb5.so  # [linux]
+    - test -f $PREFIX/lib/libgssrpc.so  # [linux]
+    - test -f $PREFIX/lib/libkrb5support.so  # [linux]
+    - if not exist %LIBRARY_LIB%\\libkrb5.lib exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\libgssapi_krb5.lib exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\libgssrpc.lib exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\libkrb5support.lib exit 1  # [win]
+    
+    # Test libkrb5-dependent headers exist
+    - test -f $PREFIX/include/krb5.h  # [linux]
+    - test -f $PREFIX/include/gssapi.h  # [linux]
+    - test -f $PREFIX/include/gssapi/gssapi.h  # [linux]
+    - test -f $PREFIX/include/gssapi/gssapi_krb5.h  # [linux]
+    - test -f $PREFIX/include/krb5/krb5.h  # [linux]
+    - test -f $PREFIX/include/gssrpc/auth_gssapi.h  # [linux]
+    - if not exist %LIBRARY_INC%\\krb5.h exit 1  # [win]
+    - if not exist %LIBRARY_INC%\\gssapi.h exit 1  # [win]
+    - if not exist %LIBRARY_INC%\\gssapi\\gssapi.h exit 1  # [win]
+    - if not exist %LIBRARY_INC%\\gssapi\\gssapi_krb5.h exit 1  # [win]
+    - if not exist %LIBRARY_INC%\\krb5\\krb5.h exit 1  # [win]
+    - if not exist %LIBRARY_INC%\\gssrpc\\auth_gssapi.h exit 1  # [win]
+    
+    # Test libkrb5-dependent utilities exist
+    - test -f $PREFIX/bin/krb5-config  # [linux]
+    - test -f $PREFIX/bin/gss-client  # [linux]
+    - if not exist %LIBRARY_BIN%\\krb5-config.exe exit 1  # [win]
+    - if not exist %LIBRARY_BIN%\\gss-client.exe exit 1  # [win]
+    
+    # Test that libkrb5 utilities work
+    - $PREFIX/bin/krb5-config --version  # [linux]
+    - $PREFIX/bin/krb5-config --libs  # [linux]
+    - $PREFIX/bin/krb5-config --cflags  # [linux]
+    - %LIBRARY_BIN%\\krb5-config.exe --version  # [win]
+    - %LIBRARY_BIN%\\krb5-config.exe --libs  # [win]
+    - %LIBRARY_BIN%\\krb5-config.exe --cflags  # [win]
 
 about:
   home: https://www.cyrusimap.org/sasl/
