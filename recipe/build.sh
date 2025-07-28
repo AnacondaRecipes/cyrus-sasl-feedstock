@@ -6,11 +6,6 @@ set -x
 
 if [[ ${target_platform} == osx-* ]]; then
   DISABLE_MACOS_FRAMEWORK=--disable-macos-framework
-  # Disable GSSAPI on macOS due to compatibility issues.
-  # The issue is that the system GSSAPI headers are being found first and the system headers are incompatible.
-  GSSAPI_OPTION="--disable-gssapi"
-else
-  GSSAPI_OPTION="--enable-gssapi"
 fi
 
 # Cyrus sasl REALLY wants something called gcc to exist.  Desperately
@@ -22,7 +17,7 @@ autoreconf -vfi
 ./configure --prefix=${PREFIX}                    \
             --host=${HOST}                        \
             ${BUILD_FLAG}                         \
-            ${GSSAPI_OPTION}                       \
+            ${GSSAPI}                             \
             --enable-digest                       \
             --with-des=${PREFIX}                  \
             --with-plugindir=${PREFIX}/lib/sasl2  \

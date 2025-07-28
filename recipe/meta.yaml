@@ -60,13 +60,14 @@ test:
   requires:
     - pkg-config  # [unix]
   commands:
+    - echo ON  # [win]
     # Test main headers exist
     - test -f $PREFIX/include/sasl/sasl.h  # [unix]
     - test -f $PREFIX/include/sasl/saslplug.h  # [unix]
     - test -f $PREFIX/include/sasl/saslutil.h  # [unix]
-    - if not exist %LIBRARY_INC%\\sasl\\sasl.h exit 1  # [win]
-    - if not exist %LIBRARY_INC%\\sasl\\saslplug.h exit 1  # [win]
-    - if not exist %LIBRARY_INC%\\sasl\\saslutil.h exit 1  # [win]
+    - if exist %LIBRARY_INC%\\sasl\\sasl.h (exit 0) else (exit 1)   # [win]
+    - if exist %LIBRARY_INC%\\sasl\\saslplug.h (exit 0) else (exit 1)   # [win]
+    - if exist %LIBRARY_INC%\\sasl\\saslutil.h (exit 0) else (exit 1)   # [win]
 
     # Test main libraries exist
     - test -f $PREFIX/lib/libsasl2.dylib  # [osx]
@@ -81,10 +82,10 @@ test:
     - test -f $PREFIX/lib/sasl2/libplain.so  # [unix]
     - test -f $PREFIX/lib/sasl2/libsasldb.so  # [osx]
     - test -f $PREFIX/lib/sasl2/libgssapiv2.so  # [linux]
-    - if not exist %LIBRARY_LIB%\\sasl2\\libanonymous.dll exit 1  # [win]
-    - if not exist %LIBRARY_LIB%\\sasl2\\libplain.dll exit 1  # [win]
-    - if not exist %LIBRARY_LIB%\\sasl2\\libsasldb.dll exit 1  # [win]
-    - if not exist %LIBRARY_LIB%\\sasl2\\libgssapiv2.dll exit 1  # [win]
+    - if exist %LIBRARY_LIB%\\sasl2\\libanonymous.dll (exit 0) else (exit 1)   # [win]
+    - if exist %LIBRARY_LIB%\\sasl2\\libplain.dll (exit 0) else (exit 1)   # [win]
+    - if exist %LIBRARY_LIB%\\sasl2\\libsasldb.dll (exit 0) else (exit 1)   # [win]
+    - if exist %LIBRARY_LIB%\\sasl2\\libgssapiv2.dll (exit 0) else (exit 1)   # [win]
 
     # Test key binaries exist
     - test -f $PREFIX/sbin/saslauthd  # [unix]
