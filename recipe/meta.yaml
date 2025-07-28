@@ -57,6 +57,8 @@ requirements:
     - ldap3 2.9.1          # [win]
 
 test:
+  requires:
+    - pkg-config  # [unix]
   commands:
     # Test main headers exist
     - test -f $PREFIX/include/sasl/sasl.h  # [unix]
@@ -76,9 +78,9 @@ test:
     - if not exist %LIBRARY_LIB%\\pkgconfig\\libsasl2.pc exit 1  # [win]
 
     # Test key SASL plugins exist
-    - test -f $PREFIX/lib/sasl2/libanonymous.3.so  # [unix]
-    - test -f $PREFIX/lib/sasl2/libplain.3.so  # [unix]
-    - test -f $PREFIX/lib/sasl2/libsasldb.3.so  # [unix]
+    - test -f $PREFIX/lib/sasl2/libanonymous.so  # [unix]
+    - test -f $PREFIX/lib/sasl2/libplain.so  # [unix]
+    - test -f $PREFIX/lib/sasl2/libsasldb.so  # [unix]
     - if not exist %LIBRARY_LIB%\\sasl2\\libanonymous.dll exit 1  # [win]
     - if not exist %LIBRARY_LIB%\\sasl2\\libplain.dll exit 1  # [win]
     - if not exist %LIBRARY_LIB%\\sasl2\\libsasldb.dll exit 1  # [win]
