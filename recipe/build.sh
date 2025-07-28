@@ -6,6 +6,11 @@ set -x
 
 if [[ ${target_platform} == osx-* ]]; then
   DISABLE_MACOS_FRAMEWORK=--disable-macos-framework
+  # Enable GSSAPI on macOS - libkrb5 now includes all necessary headers
+  GSSAPI_OPTION="--enable-gssapi"
+else
+  # Enable GSSAPI on Linux - libkrb5 now includes all necessary headers
+  GSSAPI_OPTION="--enable-gssapi"
 fi
 
 # Cyrus sasl REALLY wants something called gcc to exist.  Desperately
@@ -17,7 +22,7 @@ autoreconf -vfi
 ./configure --prefix=${PREFIX}                    \
             --host=${HOST}                        \
             ${BUILD_FLAG}                         \
-            ${GSSAPI}                             \
+            ${GSSAPI_OPTION}                       \
             --enable-digest                       \
             --with-des=${PREFIX}                  \
             --with-plugindir=${PREFIX}/lib/sasl2  \
