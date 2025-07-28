@@ -81,7 +81,7 @@ test:
     - test -f $PREFIX/lib/sasl2/libanonymous.so  # [unix]
     - test -f $PREFIX/lib/sasl2/libplain.so  # [unix]
     - test -f $PREFIX/lib/sasl2/libsasldb.so  # [osx]
-    - test -f $PREFIX/lib/sasl2/libgssapiv2.so  # [linux]
+    - test -f $PREFIX/lib/sasl2/libgssapiv2.so  # [unix]
     - if exist %LIBRARY_LIB%\\sasl2\\libanonymous.dll (exit 0) else (exit 1)   # [win]
     - if exist %LIBRARY_LIB%\\sasl2\\libplain.dll (exit 0) else (exit 1)   # [win]
     - if exist %LIBRARY_LIB%\\sasl2\\libsasldb.dll (exit 0) else (exit 1)   # [win]
@@ -89,8 +89,8 @@ test:
 
     # Test key binaries exist
     - test -f $PREFIX/sbin/saslauthd  # [unix]
-    - test -f $PREFIX/sbin/saslpasswd2  # [unix]
-    - test -f $PREFIX/sbin/sasldblistusers2  # [unix]
+    - test -f $PREFIX/sbin/saslpasswd2  # [osx]
+    - test -f $PREFIX/sbin/sasldblistusers2  # [osx]
     
     # Test that the library can be linked
     - pkg-config --libs libsasl2  # [unix]
