@@ -51,7 +51,7 @@ requirements:
     - patch        # [not win]
     - pkg-config
   host:
-    - krb5 {{ krb5 }}
+    - libkrb5 {{ krb5 }}
     - openssl {{ openssl }}
     - libdb ==6.2.*        # [win]
     - sqlite {{ sqlite }}  # [win]
