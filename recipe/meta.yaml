@@ -80,7 +80,7 @@ test:
     # Test key SASL plugins exist
     - test -f $PREFIX/lib/sasl2/libanonymous.so  # [unix]
     - test -f $PREFIX/lib/sasl2/libplain.so  # [unix]
-    - test -f $PREFIX/lib/sasl2/libsasldb.so  # [unix]
+    - test -f $PREFIX/lib/sasl2/libsasldb.so  # [osx]
     - test -f $PREFIX/lib/sasl2/libgssapiv2.so  # [linux]
     - if not exist %LIBRARY_LIB%\\sasl2\\libanonymous.dll exit 1  # [win]
     - if not exist %LIBRARY_LIB%\\sasl2\\libplain.dll exit 1  # [win]
@@ -94,11 +94,9 @@ test:
     - if not exist %LIBRARY_BIN%\\saslauthd.exe exit 1  # [win]
     - if not exist %LIBRARY_BIN%\\saslpasswd2.exe exit 1  # [win]
     - if not exist %LIBRARY_BIN%\\sasldblistusers2.exe exit 1  # [win]
-
     # Test that the library can be linked
     - pkg-config --libs libsasl2  # [unix]
     - pkg-config --cflags libsasl2  # [unix]
-    
     # Test libkrb5-dependent libraries exist
     - test -f $PREFIX/lib/libkrb5.so  # [linux]
     - test -f $PREFIX/lib/libgssapi_krb5.so  # [linux]
@@ -108,7 +106,6 @@ test:
     - if not exist %LIBRARY_LIB%\\libgssapi_krb5.lib exit 1  # [win]
     - if not exist %LIBRARY_LIB%\\libgssrpc.lib exit 1  # [win]
     - if not exist %LIBRARY_LIB%\\libkrb5support.lib exit 1  # [win]
-    
     # Test libkrb5-dependent headers exist
     - test -f $PREFIX/include/krb5.h  # [linux]
     - test -f $PREFIX/include/gssapi.h  # [linux]
