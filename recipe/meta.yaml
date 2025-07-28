@@ -60,7 +60,6 @@ test:
   requires:
     - pkg-config  # [unix]
   commands:
-    - echo ON  # [win]
     # Test main headers exist
     - test -f $PREFIX/include/sasl/sasl.h  # [unix]
     - test -f $PREFIX/include/sasl/saslplug.h  # [unix]
@@ -82,7 +81,7 @@ test:
     - test -f $PREFIX/lib/sasl2/libanonymous.so  # [unix]
     - test -f $PREFIX/lib/sasl2/libplain.so  # [unix]
     - test -f $PREFIX/lib/sasl2/libsasldb.so  # [unix]
-    - test -f $PREFIX/lib/sasl2/libgssapiv2.so  # [unix]
+    - test -f $PREFIX/lib/sasl2/libgssapiv2.so  # [linux]
     - if not exist %LIBRARY_LIB%\\sasl2\\libanonymous.dll exit 1  # [win]
     - if not exist %LIBRARY_LIB%\\sasl2\\libplain.dll exit 1  # [win]
     - if not exist %LIBRARY_LIB%\\sasl2\\libsasldb.dll exit 1  # [win]
