@@ -58,8 +58,42 @@ requirements:
 
 test:
   commands:
-    - echo "DONE"
+    # Test main headers exist
+    - test -f $PREFIX/include/sasl/sasl.h  # [unix]
+    - test -f $PREFIX/include/sasl/saslplug.h  # [unix]
+    - test -f $PREFIX/include/sasl/saslutil.h  # [unix]
+    - if not exist %LIBRARY_INC%\\sasl\\sasl.h exit 1  # [win]
+    - if not exist %LIBRARY_INC%\\sasl\\saslplug.h exit 1  # [win]
+    - if not exist %LIBRARY_INC%\\sasl\\saslutil.h exit 1  # [win]
+
+    # Test main libraries exist
+    - test -f $PREFIX/lib/libsasl2.dylib  # [osx]
+    - test -f $PREFIX/lib/libsasl2.so  # [linux]
     - if not exist %LIBRARY_LIB%\\libsasl.lib exit 1  # [win]
+
+    # Test pkg-config file exists
+    - test -f $PREFIX/lib/pkgconfig/libsasl2.pc  # [unix]
+    - if not exist %LIBRARY_LIB%\\pkgconfig\\libsasl2.pc exit 1  # [win]
+
+    # Test key SASL plugins exist
+    - test -f $PREFIX/lib/sasl2/libanonymous.3.so  # [unix]
+    - test -f $PREFIX/lib/sasl2/libplain.3.so  # [unix]
+    - test -f $PREFIX/lib/sasl2/libsasldb.3.so  # [unix]
+    - if not exist %LIBRARY_LIB%\\sasl2\\libanonymous.dll exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\sasl2\\libplain.dll exit 1  # [win]
+    - if not exist %LIBRARY_LIB%\\sasl2\\libsasldb.dll exit 1  # [win]
+
+    # Test key binaries exist
+    - test -f $PREFIX/sbin/saslauthd  # [unix]
+    - test -f $PREFIX/sbin/saslpasswd2  # [unix]
+    - test -f $PREFIX/sbin/sasldblistusers2  # [unix]
+    - if not exist %LIBRARY_BIN%\\saslauthd.exe exit 1  # [win]
+    - if not exist %LIBRARY_BIN%\\saslpasswd2.exe exit 1  # [win]
+    - if not exist %LIBRARY_BIN%\\sasldblistusers2.exe exit 1  # [win]
+
+    # Test that the library can be linked
+    - pkg-config --libs libsasl2  # [unix]
+    - pkg-config --cflags libsasl2  # [unix]
 
 about:
   home: https://www.cyrusimap.org/sasl/
