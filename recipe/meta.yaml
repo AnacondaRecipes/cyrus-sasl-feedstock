@@ -60,6 +60,7 @@ test:
   requires:
     - pkg-config  # [unix]
   commands:
+    - echo ON  # [win]
     # Test main headers exist
     - test -f $PREFIX/include/sasl/sasl.h  # [unix]
     - test -f $PREFIX/include/sasl/saslplug.h  # [unix]
