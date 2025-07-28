@@ -52,7 +52,6 @@ requirements:
   host:
     - libkrb5 {{ krb5 }}
     - openssl {{ openssl }}
-    - libxcrypt 4.4.36     # [linux]
     - libdb ==6.2.*        # [win]
     - libntlm {{ libntlm}} # [unix]
     - sqlite {{ sqlite }}  # [win]
