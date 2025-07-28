@@ -43,17 +43,18 @@ requirements:
     - git          # [unix]
     - groff        # [unix]
     - libtool      # [unix]
-    - m2-bash      # [win]
-    - m2-gcc-libs  # [win]
-    - m2-patch     # [win]
-    - m2-patch     # [win]
+    - msys2-bash      # [win]
+    - msys2-gcc-libs  # [win]
+    - msys2-patch     # [win]
     - make         # [unix]
     - patch        # [not win]
     - pkg-config
   host:
     - libkrb5 {{ krb5 }}
     - openssl {{ openssl }}
+    - libxcrypt 4.4.36     # [linux]
     - libdb ==6.2.*        # [win]
+    - libntlm {{ libntlm}} # [unix]
     - sqlite {{ sqlite }}  # [win]
     - ldap3 2.9.1          # [win]
 
