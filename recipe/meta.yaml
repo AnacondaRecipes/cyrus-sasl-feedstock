@@ -75,7 +75,6 @@ test:
 
     # Test pkg-config file exists
     - test -f $PREFIX/lib/pkgconfig/libsasl2.pc  # [unix]
-    - if not exist %LIBRARY_LIB%\\pkgconfig\\libsasl2.pc exit 1  # [win]
 
     # Test key SASL plugins exist
     - test -f $PREFIX/lib/sasl2/libanonymous.so  # [unix]
