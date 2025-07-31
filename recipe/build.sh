@@ -8,24 +8,6 @@ if [[ ${target_platform} == osx-* ]]; then
   DISABLE_MACOS_FRAMEWORK=--disable-macos-framework
 fi
 
-if [[ ${target_platform} =~ .*ppc.* ]]; then
-  # We should probably run autoreconf here instead, but I am tired of this software.
-  BUILD_FLAG="--build=${HOST}"
-  GSSAPI="--enable-gssapi"
-  if [[ 1 == 1 ]]; then
-    echo libtoolize
-    libtoolize
-    echo aclocal -I cmulocal -I config
-    aclocal -I cmulocal -I config
-    echo autoheader
-    autoheader
-    echo autoconf
-    autoconf
-    echo automake --add-missing --include-deps
-    automake --add-missing --include-deps
-  fi
-fi
-
 # Cyrus sasl REALLY wants something called gcc to exist.  Desperately
 ln -s ${CC} ${BUILD_PREFIX}/bin/gcc
 
@@ -35,7 +17,7 @@ autoreconf -vfi
 ./configure --prefix=${PREFIX}                    \
             --host=${HOST}                        \
             ${BUILD_FLAG}                         \
-            ${GSSAPI}                             \
+            --enable-gssapi                       \
             --enable-digest                       \
             --with-des=${PREFIX}                  \
             --with-plugindir=${PREFIX}/lib/sasl2  \

@@ -10,10 +10,8 @@ source:
   # - url: https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-{{ version }}/cyrus-sasl-{{ version }}.tar.gz
   #   sha256: 26866b1549b00ffd020f188a43c258017fa1c382b3ddadd8201536f72efb05d5
   # - url: ftp://ftp.cyrusimap.org/cyrus-sasl/{{ name }}-{{ version }}.tar.gz
-  
   url: https://github.com/cyrusimap/cyrus-sasl/archive/cyrus-sasl-{{ version }}.tar.gz
   sha256: 3e38933a30b9ce183a5488b4f6a5937a702549cde0d3287903d80968ad4ec341
-  
   patches:
     - patches/0001-Include-stddef-in-sasl.h-for-size_t.patch  # [win]
     - patches/0002-adjust-Makefile.am-files-for-osx.patch  # [win]
@@ -25,7 +23,7 @@ source:
     - patches/0010-cumulative-ossl3.patch
 
 build:
-  number: 2
+  number: 3
   missing_dso_whitelist:          # [osx]
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libpam.2.dylib     # [osx]
@@ -40,29 +38,63 @@ requirements:
     - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - libtool      # [unix]
-    - pkg-config
-    - automake     # [unix]
     - autoconf     # [unix]
-    - make         # [unix]
-    - groff        # [unix]
-    - patch        # [not win]
-    - m2-patch     # [win]
+    - automake     # [unix]
     - git          # [unix]
-    - m2-bash      # [win]
-    - m2-patch     # [win]
-    - m2-gcc-libs  # [win]
+    - groff        # [unix]
+    - libtool      # [unix]
+    - msys2-bash      # [win]
+    - msys2-gcc-libs  # [win]
+    - msys2-patch     # [win]
+    - make         # [unix]
+    - patch        # [not win]
+    - pkg-config
   host:
-    - krb5 {{ krb5 }}
+    - libkrb5 {{ krb5 }}
     - openssl {{ openssl }}
     - libdb ==6.2.*        # [win]
     - sqlite {{ sqlite }}  # [win]
     - ldap3 2.9.1          # [win]
 
 test:
+  requires:
+    - pkg-config  # [unix]
   commands:
-    - echo "DONE"
+    - echo ON  # [win]
+    # Test main headers exist
+    - test -f $PREFIX/include/sasl/sasl.h  # [unix]
+    - test -f $PREFIX/include/sasl/saslplug.h  # [unix]
+    - test -f $PREFIX/include/sasl/saslutil.h  # [unix]
+    - if exist %LIBRARY_INC%\\sasl\\sasl.h (exit 0) else (exit 1)   # [win]
+    - if exist %LIBRARY_INC%\\sasl\\saslplug.h (exit 0) else (exit 1)   # [win]
+    - if exist %LIBRARY_INC%\\sasl\\saslutil.h (exit 0) else (exit 1)   # [win]
+
+    # Test main libraries exist
+    - test -f $PREFIX/lib/libsasl2.dylib  # [osx]
+    - test -f $PREFIX/lib/libsasl2.so  # [linux]
     - if not exist %LIBRARY_LIB%\\libsasl.lib exit 1  # [win]
+
+    # Test pkg-config file exists
+    - test -f $PREFIX/lib/pkgconfig/libsasl2.pc  # [unix]
+
+    # Test key SASL plugins exist
+    - test -f $PREFIX/lib/sasl2/libanonymous.so  # [unix]
+    - test -f $PREFIX/lib/sasl2/libplain.so  # [unix]
+    - test -f $PREFIX/lib/sasl2/libsasldb.so  # [osx]
+    - test -f $PREFIX/lib/sasl2/libgssapiv2.so  # [unix]
+    - if exist %LIBRARY_LIB%\\sasl2\\libanonymous.dll (exit 0) else (exit 1)   # [win]
+    - if exist %LIBRARY_LIB%\\sasl2\\libplain.dll (exit 0) else (exit 1)   # [win]
+    - if exist %LIBRARY_LIB%\\sasl2\\libsasldb.dll (exit 0) else (exit 1)   # [win]
+    - if exist %LIBRARY_LIB%\\sasl2\\libgssapiv2.dll (exit 0) else (exit 1)   # [win]
+
+    # Test key binaries exist
+    - test -f $PREFIX/sbin/saslauthd  # [unix]
+    - test -f $PREFIX/sbin/saslpasswd2  # [osx]
+    - test -f $PREFIX/sbin/sasldblistusers2  # [osx]
+    
+    # Test that the library can be linked
+    - pkg-config --libs libsasl2  # [unix]
+    - pkg-config --cflags libsasl2  # [unix]
 
 about:
   home: https://www.cyrusimap.org/sasl/
