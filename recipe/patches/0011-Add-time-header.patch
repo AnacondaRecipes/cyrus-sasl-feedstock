@@ -1,0 +1,39 @@
+From 175c5889c467b629e8ddddce35d9998fd1094d65 Mon Sep 17 00:00:00 2001
+From: Mikolaj Gralczyk <mgralczyk@anaconda.com>
+Date: Tue, 20 Jan 2026 13:41:44 +0100
+Subject: [PATCH] Add time header
+
+This fixes an error on linux:
+error: implicit declaration of function 'time' [-Wimplicit-function-declaration]
+---
+ lib/saslutil.c | 1 +
+ plugins/cram.c | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/lib/saslutil.c b/lib/saslutil.c
+index 46c628c7..c32d5986 100644
+--- a/lib/saslutil.c
++++ b/lib/saslutil.c
+@@ -56,6 +56,7 @@
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ #include <errno.h>
++#include <time.h>
+ #ifdef HAVE_UNISTD_H
+ #include <unistd.h>
+ #endif
+diff --git a/plugins/cram.c b/plugins/cram.c
+index d02e9baa..f9adf9ca 100644
+--- a/plugins/cram.c
++++ b/plugins/cram.c
+@@ -48,6 +48,7 @@
+ #include <string.h>
+ #include <stdlib.h>
+ #include <stdio.h>
++#include <time.h>
+ #ifndef macintosh
+ #include <sys/stat.h>
+ #endif
+-- 
+2.50.1 (Apple Git-155)
+

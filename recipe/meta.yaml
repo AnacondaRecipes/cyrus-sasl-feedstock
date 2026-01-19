@@ -10,7 +10,7 @@ source:
   # - url: https://github.com/cyrusimap/cyrus-sasl/releases/download/cyrus-sasl-{{ version }}/cyrus-sasl-{{ version }}.tar.gz
   #   sha256: 26866b1549b00ffd020f188a43c258017fa1c382b3ddadd8201536f72efb05d5
   # - url: ftp://ftp.cyrusimap.org/cyrus-sasl/{{ name }}-{{ version }}.tar.gz
-  url: https://github.com/cyrusimap/cyrus-sasl/archive/cyrus-sasl-{{ version }}.tar.gz
+  url: https://github.com/cyrusimap/{{ name }}/archive/{{ name }}-{{ version }}.tar.gz
   sha256: 3e38933a30b9ce183a5488b4f6a5937a702549cde0d3287903d80968ad4ec341
   patches:
     - patches/0001-Include-stddef-in-sasl.h-for-size_t.patch  # [win]
@@ -21,9 +21,10 @@ source:
     - patches/0006-win32-Define-GCC_FALLTHROUGH.patch  # [win]
     - patches/0009-cumulative-digestmd5.patch
     - patches/0010-cumulative-ossl3.patch
+    - patches/0011-Add-time-header.patch # [linux]
 
 build:
-  number: 3
+  number: 4
   missing_dso_whitelist:          # [osx]
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libpam.2.dylib     # [osx]
@@ -31,7 +32,7 @@ build:
     # https://abi-laboratory.pro/tracker/timeline/cyrus-sasl/
     # SONAME was changed once in a patch release but it was 6 years ago so
     # giving them the benefit of the doubt that it was a one-off mistake.
-    - {{ pin_subpackage('cyrus-sasl') }}
+    - {{ pin_subpackage(name) }}
 
 requirements:
   build:
@@ -45,10 +46,9 @@ requirements:
     - libtool      # [unix]
     - msys2-bash      # [win]
     - msys2-gcc-libs  # [win]
-    - msys2-patch     # [win]
     - make         # [unix]
-    - patch        # [not win]
     - pkg-config
+    - {{ cdt('libxcrypt-devel') }}  # [linux]
   host:
     - libkrb5 {{ krb5 }}
     - openssl {{ openssl }}
