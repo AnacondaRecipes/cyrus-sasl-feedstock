@@ -35,7 +35,6 @@ pushd plugins
   if not exist gssapiv2_init.c bash -lc "./makeinit.sh gssapiv2_init.c"
   if not exist kerberos4_init.c bash -lc "./makeinit.sh kerberos4_init.c"
   if not exist login_init.c bash -lc "./makeinit.sh login_init.c"
-  if not exist ntlm_init.c bash -lc "./makeinit.sh ntlm_init.c"
   if not exist otp_init.c bash -lc "./makeinit.sh otp_init.c"
   if not exist passdss_init.c bash -lc "./makeinit.sh passdss_init.c"
   if not exist plain_init.c bash -lc "./makeinit.sh plain_init.c"
@@ -47,17 +46,11 @@ popd
 :skip_makeinit
 :: We could modify makeinit.sh to include ../common/plugin_common.h
 xcopy /I /F /Y common\plugin_common.h plugins
-:: .. but then we also hit
-:: ntlm.c
-:: ntlm.c(100): fatal error C1083: Cannot open include file: 'crypto-compat.h': No such file or directory
-:: .. so something more fundamental is not working
-xcopy /I /F /Y common\crypto-compat.h plugins
 
 nmake /f NTMakefile ^
         VERBOSE=1 ^
         DB_LIB=libdb62.lib ^
         STATIC=no ^
-        NTLM=1 ^
         GSSAPI=MIT ^
         SQL=SQLITE3 ^
         SRP=1 ^

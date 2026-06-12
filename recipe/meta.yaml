@@ -24,7 +24,7 @@ source:
     - patches/0011-Add-time-header.patch # [linux]
 
 build:
-  number: 4
+  number: 5
   missing_dso_whitelist:          # [osx]
     - /usr/lib/libresolv.9.dylib  # [osx]
     - /usr/lib/libpam.2.dylib     # [osx]

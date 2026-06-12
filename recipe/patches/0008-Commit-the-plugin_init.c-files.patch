@@ -12,14 +12,13 @@ Subject: [PATCH 8/8] Commit the plugin_init.c files
  plugins/gssapiv2_init.c  | 43 ++++++++++++++++++++++++++++++++++++++++
  plugins/kerberos4_init.c | 43 ++++++++++++++++++++++++++++++++++++++++
  plugins/login_init.c     | 43 ++++++++++++++++++++++++++++++++++++++++
- plugins/ntlm_init.c      | 43 ++++++++++++++++++++++++++++++++++++++++
  plugins/otp_init.c       | 43 ++++++++++++++++++++++++++++++++++++++++
  plugins/passdss_init.c   | 43 ++++++++++++++++++++++++++++++++++++++++
  plugins/plain_init.c     | 43 ++++++++++++++++++++++++++++++++++++++++
  plugins/sasldb_init.c    | 38 +++++++++++++++++++++++++++++++++++
  plugins/scram_init.c     | 43 ++++++++++++++++++++++++++++++++++++++++
  plugins/srp_init.c       | 43 ++++++++++++++++++++++++++++++++++++++++
- 15 files changed, 598 insertions(+), 1 deletion(-)
+ 14 files changed, 555 insertions(+), 1 deletion(-)
  create mode 100644 plugins/anonymous_init.c
  create mode 100644 plugins/crammd5_init.c
  create mode 100644 plugins/digestmd5_init.c
@@ -27,7 +26,6 @@ Subject: [PATCH 8/8] Commit the plugin_init.c files
  create mode 100644 plugins/gssapiv2_init.c
  create mode 100644 plugins/kerberos4_init.c
  create mode 100644 plugins/login_init.c
- create mode 100644 plugins/ntlm_init.c
  create mode 100644 plugins/otp_init.c
  create mode 100644 plugins/passdss_init.c
  create mode 100644 plugins/plain_init.c
@@ -387,55 +385,6 @@ index 0000000..cad7575
 +
 +SASL_CLIENT_PLUG_INIT( login )
 +SASL_SERVER_PLUG_INIT( login )
-+
-diff --git a/plugins/ntlm_init.c b/plugins/ntlm_init.c
-new file mode 100644
-index 0000000..a336fda
---- /dev/null
-+++ b/plugins/ntlm_init.c
-@@ -0,0 +1,43 @@
-+
-+#include <config.h>
-+
-+#include <string.h>
-+#include <stdlib.h>
-+#include <stdio.h>
-+#ifndef macintosh
-+#include <sys/stat.h>
-+#endif
-+#include <fcntl.h>
-+#include <assert.h>
-+
-+#include <sasl.h>
-+#include <saslplug.h>
-+#include <saslutil.h>
-+
-+#include "plugin_common.h"
-+
-+#ifdef macintosh
-+#include <sasl_ntlm_plugin_decl.h>
-+#endif
-+
-+#ifdef WIN32
-+BOOL APIENTRY DllMain( HANDLE hModule, 
-+                       DWORD  ul_reason_for_call, 
-+                       LPVOID lpReserved
-+					 )
-+{
-+    switch (ul_reason_for_call)
-+	{
-+		case DLL_PROCESS_ATTACH:
-+		case DLL_THREAD_ATTACH:
-+		case DLL_THREAD_DETACH:
-+		case DLL_PROCESS_DETACH:
-+			break;
-+    }
-+    return TRUE;
-+}
-+#endif
-+
-+SASL_CLIENT_PLUG_INIT( ntlm )
-+SASL_SERVER_PLUG_INIT( ntlm )
 +
 diff --git a/plugins/otp_init.c b/plugins/otp_init.c
 new file mode 100644
